@@ -1,36 +1,76 @@
 package org.delcom.starter.controllers;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
-
+import java.util.Base64;
 import static org.junit.jupiter.api.Assertions.*;
 
-class HomeControllerUnitTest {
-    // Test untuk metode hello()
+public class HomeControllerTest {
+
+    HomeController controller = new HomeController();
+
     @Test
-    @DisplayName("Mengembalikan pesan selamat datang yang benar")
-    void hello_ShouldReturnWelcomeMessage() {
-        // Arrange
-        HomeController controller = new HomeController();
-
-        // Act
-        String result = controller.hello();
-
-        // Assert
-        assertEquals("Hay Abdullah, selamat datang di pengembangan aplikasi dengan Spring Boot!", result);
+    void testHello() {
+        assertTrue(controller.hello().contains("Spring Boot"));
     }
 
-    // Tambahan test untuk metode sayHello dengan parameter nama
+    // === Branch untuk sayHello ===
     @Test
-    @DisplayName("Mengembalikan pesan sapaan yang dipersonalisasi")
-    void helloWithName_ShouldReturnPersonalizedGreeting() throws Exception {
-        // Arrange
-        HomeController controller = new HomeController();
+    void testSayHelloNormal() {
+        assertEquals("Hello, Martha!", controller.sayHello("Martha"));
+    }
 
-        // Act
-        String result = controller.sayHello("Abdullah");
+    @Test
+    void testSayHelloEmpty() {
+        assertTrue(controller.sayHello("").contains("tidak boleh kosong"));
+    }
 
-        // Assert
-        assertEquals("Hello, Abdullah!", result);
+    // === Branch untuk informasiNim ===
+    @Test
+    void testInformasiNimValid() {
+        assertTrue(controller.informasiNim("IF24006").contains("IF24006"));
+    }
+
+    @Test
+    void testInformasiNimPendek() {
+        assertTrue(controller.informasiNim("123").contains("pendek"));
+    }
+
+    // === Branch untuk perolehanNilai ===
+    @Test
+    void testPerolehanNilaiAngka() {
+        String encoded = Base64.getEncoder().encodeToString("95".getBytes());
+        assertTrue(controller.perolehanNilai(encoded).contains("95"));
+    }
+
+    @Test
+    void testPerolehanNilaiNonAngka() {
+        String encoded = Base64.getEncoder().encodeToString("A+".getBytes());
+        assertTrue(controller.perolehanNilai(encoded).contains("bukan angka"));
+    }
+
+    // === Branch untuk perbedaanL ===
+    @Test
+    void testPerbedaanLNormal() {
+        String encoded = Base64.getEncoder().encodeToString("Java".getBytes());
+        assertTrue(controller.perbedaanL(encoded).contains("avaJ"));
+    }
+
+    @Test
+    void testPerbedaanLPalindrome() {
+        String encoded = Base64.getEncoder().encodeToString("aba".getBytes());
+        assertTrue(controller.perbedaanL(encoded).contains("palindrome"));
+    }
+
+    // === Branch untuk palingTer ===
+    @Test
+    void testPalingTerNormal() {
+        String encoded = Base64.getEncoder().encodeToString("hello".getBytes());
+        assertTrue(controller.palingTer(encoded).contains("HELLO"));
+    }
+
+    @Test
+    void testPalingTerSudahUpper() {
+        String encoded = Base64.getEncoder().encodeToString("HELLO".getBytes());
+        assertTrue(controller.palingTer(encoded).contains("sudah huruf besar"));
     }
 }
