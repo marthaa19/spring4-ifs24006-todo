@@ -10,7 +10,7 @@
 - Menambahkan method `sayHello()` pada HomeController
 = Menambahkan pengujian untuk method `sayHello()`.
 - update HomeController and test
-
+- - add checklist
 ## Syntax
 
 ### Melakukan Instal Ulang Kebutuhan Paket
