@@ -44,7 +44,7 @@ class HomeControllerTest {
     @Test
     @DisplayName("Informasi NIM valid")
     void testInformasiNimValid() {
-        ResponseEntity<String> response = controller.informasiNim("11S24001");
+        ResponseEntity<String> response = controller.informasiNim("11S24006");
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(response.getBody().contains("Sarjana Informatika"));
     }
