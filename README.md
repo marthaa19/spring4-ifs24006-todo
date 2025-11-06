@@ -12,6 +12,7 @@
 - update HomeController and test
 - update HomeController dan HomeControllertest
 - - add checklist
+- update home controller main sudah sesuai 
 ## Syntax
 
 ### Melakukan Instal Ulang Kebutuhan Paket
